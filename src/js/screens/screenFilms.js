@@ -21,7 +21,7 @@ export class ScreenFilm extends Screen {
   // This a Function to show Fimls Titles and episod_id
   async showFilms() {
     // Here im usig the spinner...
-    showSpinner()
+    showSpinner();
 
     // Retrieve titles of movies.
     const movies = await getFilms();
@@ -31,18 +31,21 @@ export class ScreenFilm extends Screen {
     moviesListElement.innerHTML = "";
 
     movies.results.forEach((movie) => {
+      movies.results.sort((a, b) => a.episode_id - b.episode_id);
       const movieElement = document.createElement("li");
       movieElement.id = movie.url;
       // Create Title
       const movieTitleElement = document.createElement("h6");
 
-      movieTitleElement.innerHTML = `<b style="color: #54ad7a;">Nº:</b>, ${movie.episode_id}
-      <b style="color: #54ad7a;">Title: </b><u>${movie.title}</u>`;
+      movieTitleElement.innerHTML = `<b style="color: #54ad7a;">Nº:</b> ${movie.episode_id}
+      <b style="color: #54ad7a;">Title: </b><u>${movie.title}  <b>Click to see details </b> </u>`;
+      // define the class name a movieTileElement
+      movieTitleElement.classList.add("pointer");
       movieElement.appendChild(movieTitleElement);
       moviesListElement.appendChild(movieElement);
     });
     // Here I am removing Spinner
- hideSpinner()
+    hideSpinner();
 
     // Listen to click event
     moviesListElement.addEventListener("click", (event) => {
@@ -74,7 +77,7 @@ export class ScreenFilm extends Screen {
     const infoMovieListElement = this.columnas[1].querySelector("ul");
     infoMovieListElement.innerHTML = "";
     const titleFilm = document.createElement("li");
-    titleFilm.innerHTML = `<b style="color: #54ad7a;">Title:</b> ${movieDetails.title}`;
+    titleFilm.innerHTML = `<b style="color: #54ad7a;" >Title:</b> ${movieDetails.title}`;
 
     // Creamos nombre
     const episodeId = document.createElement("p");
@@ -113,6 +116,8 @@ export class ScreenFilm extends Screen {
     const urlPlanets = urls;
     // console.log(urlPlanets);
     const listPlanet = document.getElementById("planetName");
+    // define the Class listPlanet
+    listPlanet.classList.add("pointer");
     listPlanet.innerHTML = "";
     urlPlanets.forEach((url) => {
       // call the function child.
@@ -124,9 +129,9 @@ export class ScreenFilm extends Screen {
         console.log(planetDetails);
         const planetElement = document.createElement("li");
         planetElement.id = planetDetails.url;
-
+        // Create Title
         const namePlanet = document.createElement("h6");
-        namePlanet.innerHTML = ` <b style="color: #54ad7a;">Planet Name:</b> <u>${planetDetails.name}</u>`;
+        namePlanet.innerHTML = ` <b style="color: #54ad7a;">Planet Name:</b> <u>${planetDetails.name} <b>Click to see details </b></u>`;
 
         planetElement.appendChild(namePlanet);
         listPlanet.appendChild(planetElement);
@@ -152,10 +157,10 @@ export class ScreenFilm extends Screen {
     const plantListElement = this.columnas[2].querySelector("ul");
     plantListElement.innerHTML = "";
 
+    // Creamos nombres de planetas
     const PlanetName = document.createElement("li");
     PlanetName.innerHTML = `<b style="color: #54ad7a;">Planet Name:</b> ${planetDetails.name}`;
 
-    // Creamos nombre
     const rotation_period = document.createElement("p");
     rotation_period.innerHTML = `<b style="color: #54ad7a;">Rotation Period:</b>  ${planetDetails.rotation_period}`;
     PlanetName.appendChild(rotation_period);
@@ -189,6 +194,6 @@ export class ScreenFilm extends Screen {
     PlanetName.appendChild(population);
 
     plantListElement.appendChild(PlanetName);
-    hideSpinner()
+    hideSpinner();
   }
 }
