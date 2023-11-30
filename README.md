@@ -1,7 +1,3 @@
-Descripción del Proyecto para el Portfolio:
-
----
-
 **Aplicación de Registro con Integración API**
 
 Este proyecto se enfoca en la creación de una aplicación que permite a los usuarios registrarse ingresando su correo electrónico, nombre de usuario y nombre completo. La aplicación utiliza la API proporcionada por "https://jsonplaceholder.typicode.com" para simular la creación de usuarios.
